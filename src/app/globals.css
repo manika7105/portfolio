@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #e1edea;
+  --bg-elevated: #f0f7f5;
+  --bg-elevated-2: #d2e2de;
+  --fg: #17302c;
+  --muted: #52685f;
+  --border: #c3d6d0;
+  --accent-a: #0f766e;
+  --accent-b: #0e7490;
+  --accent-soft: rgba(15, 118, 110, 0.12);
+  --ring: rgba(15, 118, 110, 0.4);
+  --shadow-sm: 0 1px 2px rgba(17, 35, 30, 0.07);
+  --shadow-md: 0 16px 40px -16px rgba(17, 35, 30, 0.22),
+    0 2px 10px -2px rgba(17, 35, 30, 0.1);
+  --bg-ambient: radial-gradient(
+      circle at 12% -10%,
+      rgba(15, 118, 110, 0.07),
+      transparent 42%
+    ),
+    radial-gradient(circle at 88% 15%, rgba(14, 116, 144, 0.06), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(15, 118, 110, 0.04), transparent 45%);
+}
+
+.dark {
+  --bg: #05080a;
+  --bg-elevated: #0a1014;
+  --bg-elevated-2: #0e161a;
+  --fg: #e7f1ee;
+  --muted: #8ca39d;
+  --border: rgba(140, 255, 220, 0.12);
+  --accent-a: #12e8a0;
+  --accent-b: #2dd4e8;
+  --accent-soft: rgba(18, 232, 160, 0.08);
+  --ring: rgba(18, 232, 160, 0.4);
+  --shadow-sm: none;
+  --shadow-md: none;
+  --bg-ambient: none;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-elevated-2: var(--bg-elevated-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent-a: var(--accent-a);
+  --color-accent-b: var(--accent-b);
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  background-image: var(--bg-ambient);
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: var(--font-body), system-ui, sans-serif;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+::selection {
+  background: var(--accent-a);
+  color: var(--bg);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-a);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--accent-a), var(--accent-b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* Signature motif: the belt-rank stripe. A thin, two-tone gradient bar
+   echoing a karate belt tip, used as an underline accent and as the
+   base for skill-proficiency meters throughout the page. */
+.belt-stripe {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-a) 0%,
+    var(--accent-b) 55%,
+    var(--border) 55%,
+    var(--border) 100%
+  );
+}
+
+.card-surface {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-surface:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.noise-veil {
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      var(--accent-soft),
+      transparent 45%
+    ),
+    radial-gradient(circle at 80% 60%, var(--accent-soft), transparent 40%);
+}
+
+@keyframes blob-float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, 6%) scale(1.08); }
+  66% { transform: translate(-3%, -4%) scale(0.96); }
+}
+
+@keyframes blob-float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-6%, 5%) scale(1.1); }
+}
+
+.hero-blob-a {
+  animation: blob-float-a 16s ease-in-out infinite;
+}
+
+.hero-blob-b {
+  animation: blob-float-b 20s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob-a,
+  .hero-blob-b {
+    animation: none;
+  }
+}
+
+/* 3D flip card (used by Certifications) */
+.flip-card-container {
+  perspective: 1600px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+}
+.flip-card-container:hover .flip-card-inner,
+.flip-card-container.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-inner {
+    transition: opacity 0.3s ease;
+  }
+  .flip-card-container:hover .flip-card-inner,
+  .flip-card-container.is-flipped .flip-card-inner {
+    transform: none;
+  }
+  .flip-card-back {
+    transform: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .flip-card-container:hover .flip-card-back,
+  .flip-card-container.is-flipped .flip-card-back {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .flip-card-container:hover .flip-card-front,
+  .flip-card-container.is-flipped .flip-card-front {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Shine sweep on buttons: a light band that travels across on hover */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+.btn-shine:hover::after {
+  transform: translateX(120%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
