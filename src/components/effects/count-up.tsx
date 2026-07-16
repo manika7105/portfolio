@@ -1,28 +1,33 @@
 "use client";
 
 import * as React from "react";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 interface CountUpProps {
   value: number;
   suffix?: string;
   decimals?: number;
   className?: string;
+  active?: boolean;
 }
 
-export function CountUp({ value, suffix = "", decimals = 0, className }: CountUpProps) {
-  const ref = React.useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const [display, setDisplay] = React.useState("0");
+export function CountUp({
+  value,
+  suffix = "",
+  decimals = 0,
+  className,
+  active = true,
+}: CountUpProps) {
+  const [display, setDisplay] = React.useState(() => (0).toFixed(decimals));
 
   const motionValue = useMotionValue(0);
   const spring = useSpring(motionValue, { stiffness: 90, damping: 20 });
 
   React.useEffect(() => {
-    if (inView) {
+    if (active) {
       motionValue.set(value);
     }
-  }, [inView, value, motionValue]);
+  }, [active, value, motionValue]);
 
   React.useEffect(() => {
     const unsubscribe = spring.on("change", (latest) => {
@@ -32,7 +37,7 @@ export function CountUp({ value, suffix = "", decimals = 0, className }: CountUp
   }, [spring, decimals]);
 
   return (
-    <motion.span ref={ref} className={className}>
+    <motion.span className={className}>
       {display}
       {suffix}
     </motion.span>
