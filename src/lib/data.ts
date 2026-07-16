@@ -21,7 +21,7 @@ export const profile = {
     "I enjoy turning ideas into responsive web applications while continuously expanding my skills through hands-on projects. My current interests include web development, data structures & algorithms, and applied machine learning.",
     "I believe the best way to learn is by building. Every project begins with curiosity and ends with new lessons—whether it's writing cleaner code, solving unexpected problems, or discovering a better way to approach a challenge. That mindset keeps me learning, improving, and excited for what's next.",
   ],
-  resumeUrl: "/resume/manika-goel-resume.pdf",
+  resumeUrl: "/resume/manika_goel_resume.pdf",
   photo: "/images/pp.jpg",
 };
 
