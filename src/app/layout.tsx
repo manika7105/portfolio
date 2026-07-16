@@ -27,8 +27,8 @@ const SITE_URL = "https://manikagoel.dev";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${profile.name} — ${profile.roles.join(" · ")}`,
-    template: `%s — ${profile.name}`,
+    default: "Manika • Portfolio",
+    template: "%s • Manika",
   },
   description:
     "Portfolio of Manika Goel, a Computer Science Engineering student and full-stack + ML developer building disciplined, production-quality software.",
