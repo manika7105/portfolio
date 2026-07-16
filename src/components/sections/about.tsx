@@ -1,4 +1,8 @@
+"use client";
+
+import * as React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { Reveal } from "@/components/effects/reveal";
 import { CountUp } from "@/components/effects/count-up";
 import {
@@ -11,6 +15,7 @@ import {
 
 export function About() {
   const currentEducation = education[0];
+  const [statsInView, setStatsInView] = React.useState(false);
 
   return (
     <section id="about" className="mx-auto max-w-5xl px-4 py-28">
@@ -48,37 +53,43 @@ export function About() {
             </Reveal>
           ))}
 
-          <Reveal delay={0.24}>
-            <div className="mt-10 grid grid-cols-2 gap-6 border-t border-[var(--border)] pt-8 sm:grid-cols-4">
-              <div>
-                <p className="font-display text-3xl font-semibold">
-                  <CountUp
-                    value={parseFloat(currentEducation.score.match(/[\d.]+/)?.[0] ?? "0")}
-                    decimals={2}
-                  />
-                </p>
-                <p className="mt-1 text-xs text-[var(--muted)]">CGPA</p>
-              </div>
-              <div>
-                <p className="font-display text-3xl font-semibold">
-                  <CountUp value={projects.length} suffix="+" />
-                </p>
-                <p className="mt-1 text-xs text-[var(--muted)]">Projects built</p>
-              </div>
-              <div>
-                <p className="font-display text-3xl font-semibold">
-                  <CountUp value={experience.length} />
-                </p>
-                <p className="mt-1 text-xs text-[var(--muted)]">Internships</p>
-              </div>
-              <div>
-                <p className="font-display text-3xl font-semibold">
-                  <CountUp value={certifications.length} suffix="+" />
-                </p>
-                <p className="mt-1 text-xs text-[var(--muted)]">Certifications</p>
-              </div>
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            onViewportEnter={() => setStatsInView(true)}
+            transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-10 grid grid-cols-2 gap-6 border-t border-[var(--border)] pt-8 sm:grid-cols-4"
+          >
+            <div>
+              <p className="font-display text-3xl font-semibold">
+                <CountUp
+                  active={statsInView}
+                  value={parseFloat(currentEducation.score.match(/[\d.]+/)?.[0] ?? "0")}
+                  decimals={2}
+                />
+              </p>
+              <p className="mt-1 text-xs text-[var(--muted)]">CGPA</p>
             </div>
-          </Reveal>
+            <div>
+              <p className="font-display text-3xl font-semibold">
+                <CountUp active={statsInView} value={projects.length} suffix="+" />
+              </p>
+              <p className="mt-1 text-xs text-[var(--muted)]">Projects built</p>
+            </div>
+            <div>
+              <p className="font-display text-3xl font-semibold">
+                <CountUp active={statsInView} value={experience.length} />
+              </p>
+              <p className="mt-1 text-xs text-[var(--muted)]">Internships</p>
+            </div>
+            <div>
+              <p className="font-display text-3xl font-semibold">
+                <CountUp active={statsInView} value={certifications.length} suffix="+" />
+              </p>
+              <p className="mt-1 text-xs text-[var(--muted)]">Certifications</p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
