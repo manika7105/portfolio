@@ -30,7 +30,7 @@ export function About() {
         <Reveal direction="right" className="mx-auto lg:mx-0">
           <div className="group relative w-64 shrink-0 sm:w-72">
             <div className="absolute -inset-1 rounded-[2rem] bg-[linear-gradient(140deg,var(--accent-a),var(--accent-b))] opacity-70 blur-lg transition-all duration-500 group-hover:opacity-100 group-hover:blur-xl" />
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2rem] border border-[var(--border)] transition-transform duration-500 ease-out group-hover:-translate-y-1">
+            <div className="relative aspect-[9/14] w-full overflow-hidden rounded-[2rem] border border-[var(--border)] transition-transform duration-500 ease-out group-hover:-translate-y-1">
               <Image
                 src={profile.photo}
                 alt={`Portrait of ${profile.name}`}
