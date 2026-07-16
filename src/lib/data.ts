@@ -22,7 +22,7 @@ export const profile = {
     "I believe the best way to learn is by building. Every project begins with curiosity and ends with new lessons—whether it's writing cleaner code, solving unexpected problems, or discovering a better way to approach a challenge. That mindset keeps me learning, improving, and excited for what's next.",
   ],
   resumeUrl: "/resume/manika-goel-resume.pdf",
-  photo: "/images/profile.png",
+  photo: "/images/pp.jpg",
 };
 
 export const socials: SocialLink[] = [
